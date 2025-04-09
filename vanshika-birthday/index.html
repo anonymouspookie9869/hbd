@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Vanshika!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #5e2b5e;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeIn 2s;
+        }
+        .name {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5em;
+            color: #c2185b;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #f8bbd0;
+            margin: 20px auto;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        .message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            background-color: rgba(255,255,255,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            animation: slideUp 1.5s;
+        }
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff5252, #ff7676);
+        }
+        .page {
+            display: none;
+            animation: fadeIn 1s;
+        }
+        .active {
+            display: block;
+        }
+        .heart {
+            color: #e91e63;
+            font-size: 1.5em;
+            animation: beat 0.8s infinite alternate;
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f44336;
+            opacity: 0;
+        }
+        @keyframes beat {
+            to { transform: scale(1.3); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1 -->
+        <div id="page1" class="page active">
+            <h1>Happy Birthday <span class="heart">❤</span></h1>
+            <div class="name">Vanshika</div>
+            <img src="https://i.imgur.com/JqYeYnW.jpg" alt="Vanshika" class="photo" id="vanshikaPhoto">
+            <p class="message">Dear Vanshika,<br>
+            On your special day, I just want you to know how incredibly amazing you are!<br>
+            Your presence makes everything better.</p>
+            <button class="btn" onclick="nextPage()">Next ➔</button>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="page2" class="page">
+            <h1>You're Magical!</h1>
+            <img src="https://i.imgur.com/Lp3Yf7c.jpg" alt="Vanshika Smiling" class="photo">
+            <p class="message">Vanshika, your smile brightens even the darkest days.<br>
+            Your laughter is my favorite melody.<br>
+            I hope your birthday is as wonderful as you make life for others!</p>
+            <button class="btn" onclick="prevPage()">⬅ Previous</button>
+            <button class="btn" onclick="nextPage()">Next ➔</button>
+        </div>
+
+        <!-- Page 3 -->
+        <div id="page3" class="page">
+            <h1>Make a Wish!</h1>
+            <img src="https://i.imgur.com/9YQ5XZj.jpg" alt="Birthday Cake" class="photo">
+            <p class="message">May all your dreams come true this year, Vanshika.<br>
+            Wishing you:<br>
+            • Endless happiness<br>
+            • Tremendous success<br>
+            • And everything beautiful in life!</p>
+            <button class="btn" onclick="prevPage()">⬅ Previous</button>
+            <button class="btn" onclick="nextPage()">Next ➔</button>
+        </div>
+
+        <!-- Page 4 -->
+        <div id="page4" class="page">
+            <h1>Special For You <span class="heart">❤</span></h1>
+            <img src="https://i.imgur.com/mW4FZQD.jpg" alt="Vanshika Special" class="photo">
+            <p class="message">Vanshika,<br>
+            I feel so lucky to know someone as special as you.<br>
+            Hope your birthday is filled with joy, love, and wonderful moments!<br><br>
+            With all my heart...</p>
+            <button class="btn" onclick="prevPage()">⬅ Previous</button>
+            <button class="btn" onclick="createConfetti()">Celebrate! 🎉</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 4;
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage--;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#e91e63', '#00bcd4', '#ffeb3b', '#4caf50', '#ff9800'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = -10 + 'px';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                confetti.style.animation = `fall ${animationDuration}s linear forwards`;
+                
+                // Create keyframes for falling animation
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes fall {
+                        to {
+                            transform: translateY(${window.innerHeight + 10}px) rotate(${Math.random() * 360}deg);
+                            opacity: 1;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+
+        // You can replace this with Vanshika's actual photo
+        const photoUrl = prompt("Enter the URL of Vanshika's photo (or leave blank for default):");
+        if (photoUrl) {
+            document.getElementById('vanshikaPhoto').src = photoUrl;
+        }
+    </script>
+</body>
+</html>
